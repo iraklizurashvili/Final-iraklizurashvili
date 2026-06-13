@@ -3,16 +3,6 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>
-    /* Mark JS-capable so .reveal content can hide; if module scripts never run
-       (e.g. opened directly via file://), reveal everything after a short delay. */
-    document.documentElement.classList.add('js');
-    addEventListener('load', function () {
-      setTimeout(function () {
-        if (!window.__ivdReady) document.documentElement.classList.add('no-reveal');
-      }, 1200);
-    });
-  </script>
   <meta name="description" content="In Vera Dent — პროფესიონალური სტომატოლოგიური კლინიკა თბილისში">
   <title>In Vera Dent — სტომატოლოგია</title>
   <link rel="stylesheet" href="css/main.css">
@@ -80,11 +70,11 @@
           </div>
           <div class="hero__stats anim-fade-up delay-4">
             <div class="stat__item">
-              <div class="stat__num" data-target="10" data-suffix="+">10+</div>
+              <div class="stat__num" data-target="10" data-suffix="+">20+</div>
               <div class="stat__label">წელი გამოცდ.</div>
             </div>
             <div class="stat__item">
-              <div class="stat__num" data-target="1000" data-suffix="+">1000+</div>
+              <div class="stat__num" data-target="1000" data-suffix="+">2000+</div>
               <div class="stat__label">პაციენტი</div>
             </div>
             <div class="stat__item">
@@ -96,7 +86,7 @@
 
         <div class="hero__image anim-fade-in delay-2">
           <img
-            src="1.jpeg"
+            src="img/hero-clinic.jpg"
             alt="In Vera Dent — სტომატოლოგიური კლინიკის ინტერიერი"
             loading="eager"
           >
@@ -142,12 +132,12 @@
       <div class="about__inner">
         <div class="about__img-wrap reveal reveal--left">
           <img
-            src="Untitled.jpeg"
+            src="img/about-clinic.jpg"
             alt="In Vera Dent კლინიკის მოდერნული სამკურნალო კაბინეტი"
             loading="lazy"
           >
           <div class="about__img-badge">
-            <span>10+</span>
+            <span>20+</span>
             წელი გამოცდილება
           </div>
         </div>
@@ -211,7 +201,7 @@
       <div class="services-grid">
         <article class="service-card reveal">
           <div class="service-card__img">
-            <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=75" alt="თერაპიული სტომატოლოგია — კარიესის მკურნალობა" loading="lazy">
+            <img src="img/service-therapy.jpg" alt="თერაპიული სტომატოლოგია — კარიესის მკურნალობა" loading="lazy">
             <div class="service-card__img-overlay"></div>
           </div>
           <div class="service-card__body">
@@ -227,7 +217,7 @@
 
         <article class="service-card reveal">
           <div class="service-card__img">
-            <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&q=75" alt="ორთოდონტია — ბრეკეტები და ინვიზელაინი" loading="lazy">
+            <img src="img/service-orthodontics.jpg" alt="ორთოდონტია — ბრეკეტები და ინვიზელაინი" loading="lazy">
             <div class="service-card__img-overlay"></div>
           </div>
           <div class="service-card__body">
@@ -243,7 +233,7 @@
 
         <article class="service-card reveal">
           <div class="service-card__img">
-            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=75" alt="იმპლანტოლოგია — კბილის იმპლანტი 10 წლის გარანტიით" loading="lazy">
+            <img src="img/service-implant.jpg" alt="იმპლანტოლოგია — კბილის იმპლანტი 10 წლის გარანტიით" loading="lazy">
             <div class="service-card__img-overlay"></div>
           </div>
           <div class="service-card__body">
@@ -280,13 +270,13 @@
           <div class="compare__viewport">
             <!-- "after" = bright/white base layer -->
             <img class="compare__img compare__img--after"
-                 src="smile-whitening.jpg"
+                 src="img/whitening-before-after.jpg"
                  alt="Smile after teeth whitening" loading="lazy">
 
             <!-- "before" = same photo, dulled/yellowed via CSS filter, clipped by --pos -->
             <div class="compare__before">
               <img class="compare__img compare__img--before"
-                   src="smile-whitening.jpg"
+                   src="img/whitening-before-after.jpg"
                    alt="Smile before teeth whitening" loading="lazy">
             </div>
 
@@ -295,8 +285,7 @@
 
             <input type="range" min="0" max="100" value="50"
                    class="compare__range"
-                   aria-label="Before and after whitening comparison slider"
-                   aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
+                   aria-label="Before and after whitening comparison slider">
 
             <div class="compare__handle" aria-hidden="true">
               <span class="compare__grip">⇄</span>
@@ -333,11 +322,6 @@
           IN VERA <span>DENT</span>
         </a>
         <p class="mt-12">პროფესიონალური სტომატოლოგიური კლინიკა თბილისში. გამოცდილება, სიახლე, კომფორტი.</p>
-        <div class="footer__socials mt-16">
-          <a href="#" class="footer__social-btn" aria-label="Facebook">📘</a>
-          <a href="#" class="footer__social-btn" aria-label="Instagram">📸</a>
-          <a href="#" class="footer__social-btn" aria-label="YouTube">▶️</a>
-        </div>
       </div>
       <div class="footer__col">
         <h4>სერვისები</h4>
@@ -364,13 +348,11 @@
           <li><a href="#">📍 თბილისი, ვ.ბარნოვის 24</a></li>
           <li><a href="tel:599932616">📞 599 93 26 16</a></li>
           <li><a href="mailto:inveradent@gmail.com">✉️ inveradent@gmail.com</a></li>
-          <li><a href="#">⏰ ორშ–შბთ 10–18</a></li>
         </ul>
       </div>
     </div>
     <div class="footer__bottom">
-      <p>© 2024 In Vera Dent. ყველა უფლება დაცულია.</p>
-      <p>Made with ❤️ in Tbilisi</p>
+      <p>© 2026 In Vera Dent. ყველა უფლება დაცულია.</p>
     </div>
   </div>
 </footer>
