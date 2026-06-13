@@ -3,50 +3,387 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>პროექტის სახელი</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="In Vera Dent — პროფესიონალური სტომატოლოგიური კლინიკა თბილისში">
+  <title>In Vera Dent — სტომატოლოგია</title>
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
-  <header>
-    <nav>
-      <span class="nav__logo">პროექტის სახელი</span>
-      <div class="nav__links">
-        <a href="index.html">ძიება</a>
-        <a href="saved.html">შენახული</a>
+<header>
+  <nav class="navbar" aria-label="მთავარი ნავიგაცია">
+    <div class="navbar__inner">
+      <a href="index.html" class="logo">
+        <div class="logo__mark">🦷</div>
+        IN VERA <span>DENT</span>
+      </a>
+
+      <ul class="nav-links">
+        <li class="nav-links__item"><a href="index.html" class="nav-links__link nav-links__link--active">მთავარი</a></li>
+        <li class="nav-links__item"><a href="services.html" class="nav-links__link">სერვისები</a></li>
+        <li class="nav-links__item"><a href="prices.html" class="nav-links__link">ფასები</a></li>
+        <li class="nav-links__item"><a href="contact.html" class="nav-links__link">კონტაქტი</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="tel:599932616" class="btn btn--ghost btn--sm">📞 599 93 26 16</a>
+        <a href="contact.html" class="btn btn--primary btn--sm">ჩაწერა</a>
       </div>
-      <div class="nav__actions">
-        <span id="nav-user"></span>
-        <button id="logout-btn" type="button">გასვლა</button>
+
+      <button class="nav-hamburger" aria-label="მენიუ" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-drawer" role="dialog" aria-label="მობილური მენიუ">
+    <a href="index.html"><span class="nav-drawer__icon">🏠</span> მთავარი</a>
+    <a href="services.html"><span class="nav-drawer__icon">🦷</span> სერვისები</a>
+    <a href="prices.html"><span class="nav-drawer__icon">💰</span> ფასები</a>
+    <a href="contact.html"><span class="nav-drawer__icon">📬</span> კონტაქტი</a>
+    <div class="nav-drawer__footer">
+      <a href="tel:599932616" class="btn btn--secondary btn--full">📞 599 93 26 16</a>
+      <a href="contact.html" class="btn btn--primary btn--full">ჩაწერა ახლავე</a>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero__inner">
+        <div class="hero__content">
+          <div class="hero__badge anim-fade-up">
+            <span class="badge badge--teal badge--dot">პროფესიონალური სტომატოლოგია</span>
+          </div>
+          <h1 class="display-xl hero__title anim-fade-up delay-1">
+            თქვენი ღიმილი —<br><em>ჩვენი პრიორიტეტი</em>
+          </h1>
+          <p class="body-lg hero__desc anim-fade-up delay-2">
+            In Vera Dent-ში ვთავაზობთ თანამედროვე სტომატოლოგიურ მომსახურებას
+            კომფორტულ გარემოში. გამოცდილი ექიმები, მოწინავე ტექნოლოგიები.
+          </p>
+          <div class="hero__actions anim-fade-up delay-3">
+            <a href="contact.html" class="btn btn--primary">📅 ჩაწერეთ ახლავე</a>
+            <a href="services.html" class="btn btn--secondary">სერვისები →</a>
+          </div>
+          <div class="hero__stats anim-fade-up delay-4">
+            <div class="stat__item">
+              <div class="stat__num" data-target="10" data-suffix="+">10+</div>
+              <div class="stat__label">წელი გამოცდ.</div>
+            </div>
+            <div class="stat__item">
+              <div class="stat__num" data-target="1000" data-suffix="+">1000+</div>
+              <div class="stat__label">პაციენტი</div>
+            </div>
+            <div class="stat__item">
+              <div class="stat__num" data-target="5">5</div>
+              <div class="stat__label">სპეციალისტი</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero__image anim-fade-in delay-2">
+          <img
+            src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?w=800&q=80"
+            alt="In Vera Dent — სტომატოლოგიური კლინიკის ინტერიერი"
+            loading="eager"
+          >
+          <div class="hero__float-card">
+            <div class="hero__float-icon">✅</div>
+            <div class="hero__float-card-text">
+              <strong>ლიცენზირებული კლინიკა</strong>
+              სერტიფიცირებული სტომატოლოგები
+            </div>
+          </div>
+        </div>
       </div>
-    </nav>
-  </header>
+    </div>
+  </section>
 
-  <main>
+  <!-- Features Strip -->
+  <section class="features-strip" aria-label="კლინიკის უპირატესობები">
+    <div class="container">
+      <div class="features-strip__grid">
+        <div class="feature-chip reveal">
+          <div class="feature-chip__icon">🛡️</div>
+          <div class="feature-chip__text">უსაფრთხო მკურნალობა<span>სტერილური გარემო</span></div>
+        </div>
+        <div class="feature-chip reveal">
+          <div class="feature-chip__icon">⏰</div>
+          <div class="feature-chip__text">მოქნილი განრიგი<span>ორშ–შბთ 10:00–18:00</span></div>
+        </div>
+        <div class="feature-chip reveal">
+          <div class="feature-chip__icon">💳</div>
+          <div class="feature-chip__text">განვადება<span>0%-იანი განვადება</span></div>
+        </div>
+        <div class="feature-chip reveal">
+          <div class="feature-chip__icon">🚗</div>
+          <div class="feature-chip__text">ადვილი პარკინგი<span>უფასო ადგილები</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- საძიებო / ფილტრის ფორმა -->
-    <section>
-      <form id="search-form">
-        <!-- დაამატე input ველები აქ (სულ მცირე 3 განსხვავებული ტიპი) -->
-        <button type="submit">ძიება</button>
-      </form>
-    </section>
+  <!-- About -->
+  <section class="section" id="about" aria-labelledby="about-title">
+    <div class="container">
+      <div class="about__inner">
+        <div class="about__img-wrap reveal reveal--left">
+          <img
+            src="https://images.unsplash.com/photo-1588776814546-1ffbb3b1d8b3?w=700&q=80"
+            alt="In Vera Dent კლინიკის მოდერნული სამკურნალო კაბინეტი"
+            loading="lazy"
+          >
+          <div class="about__img-badge">
+            <span>10+</span>
+            წელი გამოცდილება
+          </div>
+        </div>
 
-    <!-- ჩატვირთვის და შეცდომის მდგომარეობები -->
-    <p id="loading-msg" hidden>იტვირთება…</p>
-    <p id="error-msg" hidden></p>
+        <div class="reveal reveal--right">
+          <p class="label text-teal">ჩვენ შესახებ</p>
+          <h2 class="display-md mt-8" id="about-title">
+            თანამედროვე სტომატოლოგია<br>
+            <span class="text-teal">თქვენს კომფორტზე</span> მორგებული
+          </h2>
+          <p class="body-md text-soft mt-16">
+            In Vera Dent-ში ჩვენ გვჯერა, რომ სტომატოლოგის ვიზიტი სასიამოვნო გამოცდილება
+            უნდა იყოს. გამოცდილი გუნდი, მოწინავე ტექნოლოგიები და მეგობრული გარემო —
+            ეს ყველაფერი ჩვენთვის ჩვეულებრივია.
+          </p>
 
-    <!-- დინამიურად შექმნილი ბარათები აქ განთავსდება -->
-    <section>
-      <div id="results-grid"></div>
-    </section>
+          <div class="feature-list">
+            <div class="feature-row">
+              <div class="feature-row__icon">🏆</div>
+              <div>
+                <h4>თანამედროვე აღჭურვილობა</h4>
+                <p>ვიყენებთ ახალი თაობის ტექნოლოგიებს, მათ შორის 3D სკანერს და ციფრულ რენტგენს</p>
+              </div>
+            </div>
+            <div class="feature-row">
+              <div class="feature-row__icon">❤️</div>
+              <div>
+                <h4>ინდივიდუალური მიდგომა</h4>
+                <p>ყოველი პაციენტისთვის ვქმნით პერსონალიზებულ სამკურნალო გეგმას</p>
+              </div>
+            </div>
+            <div class="feature-row">
+              <div class="feature-row__icon">🔬</div>
+              <div>
+                <h4>მაღალი სტანდარტები</h4>
+                <p>ყველა პროცედურა ტარდება საერთაშორისო სტომატოლოგიური სტანდარტების მიხედვით</p>
+              </div>
+            </div>
+          </div>
 
-  </main>
+          <div class="mt-32">
+            <a href="services.html" class="btn btn--primary">ყველა სერვისი →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <footer>
-    <!-- footer-ის შიგთავსი -->
-  </footer>
+  <!-- Services Preview -->
+  <section class="section section--alt" aria-labelledby="services-title">
+    <div class="container">
+      <div class="section-header section-header--centered reveal">
+        <p class="label text-teal">სერვისები</p>
+        <h2 class="display-md mt-8" id="services-title">ჩვენი სერვისები</h2>
+        <p class="body-md text-soft mt-12 intro-text">
+          გთავაზობთ სრულ სტომატოლოგიურ მომსახურებას — პრევენციიდან
+          კომპლექსური მკურნალობის ჩათვლით
+        </p>
+      </div>
 
-  <script type="module" src="js/main.js"></script>
+      <div class="services-grid">
+        <article class="service-card reveal">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1606811841689-23dfddce3e95?w=600&q=75" alt="თერაპიული სტომატოლოგია — კარიესის მკურნალობა" loading="lazy">
+            <div class="service-card__img-overlay"></div>
+          </div>
+          <div class="service-card__body">
+            <div class="service-card__icon">🔧</div>
+            <h3>თერაპიული სტომატოლოგია</h3>
+            <p>კარიესის მკურნალობა, ფილინგები, ფესვის არხის მკურნალობა. ტკივილის გარეშე.</p>
+            <div class="service-card__footer">
+              <div class="service-card__price-tag">80 ₾-დან<span>ერთი სეანსი</span></div>
+              <a href="services.html" class="btn btn--ghost btn--sm">გაიგე →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1609840114035-3c981b782dfe?w=600&q=75" alt="ორთოდონტია — ბრეკეტები და ინვიზელაინი" loading="lazy">
+            <div class="service-card__img-overlay"></div>
+          </div>
+          <div class="service-card__body">
+            <div class="service-card__icon">😁</div>
+            <h3>ორთოდონტია</h3>
+            <p>ბრეკეტები, ინვიზელაინი, კბილების გასწორება. ლამაზი ღიმილი სწრაფად.</p>
+            <div class="service-card__footer">
+              <div class="service-card__price-tag">1200 ₾-დან<span>სრული კურსი</span></div>
+              <a href="services.html" class="btn btn--ghost btn--sm">გაიგე →</a>
+            </div>
+          </div>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-card__img">
+            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?w=600&q=75" alt="იმპლანტოლოგია — კბილის იმპლანტი 10 წლის გარანტიით" loading="lazy">
+            <div class="service-card__img-overlay"></div>
+          </div>
+          <div class="service-card__body">
+            <div class="service-card__icon">🦷</div>
+            <h3>იმპლანტოლოგია</h3>
+            <p>კბილის იმპლანტი — სერტიფიცირებული იმპლანტები 10 წლის გარანტიით.</p>
+            <div class="service-card__footer">
+              <div class="service-card__price-tag">800 ₾-დან<span>ერთი იმპლანტი</span></div>
+              <a href="services.html" class="btn btn--ghost btn--sm">გაიგე →</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="text-center mt-32 reveal">
+        <a href="services.html" class="btn btn--secondary">ყველა სერვისი ნახვა</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <!-- Patient Reviews — dynamically rendered from localStorage + real POST API -->
+  <section class="section section--alt" aria-labelledby="reviews-title">
+    <div class="container">
+
+      <div class="section-header section-header--centered reveal">
+        <p class="label text-teal">შეფასებები</p>
+        <h2 class="display-md mt-8" id="reviews-title">ჩვენი პაციენტები ამბობენ</h2>
+        <p class="body-md text-soft mt-8">რეალური შეფასებები ჩვენი პაციენტებისგან</p>
+      </div>
+
+      <!-- Average rating badge — populated by js/reviews.js -->
+      <div id="reviewsSummary" class="reviews-summary" hidden></div>
+
+      <!-- Reviews grid: populated by js/reviews.js via createElement -->
+      <div id="reviewsGrid" class="reviews-grid" role="list" aria-label="პაციენტების შეფასებები"></div>
+
+      <!-- Submit a new review -->
+      <div class="review-form-wrap reveal">
+        <h3 class="review-form-title">გაგვიზიარეთ თქვენი გამოცდილება</h3>
+        <form id="reviewForm" class="review-form" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="reviewName">სახელი <span class="required">*</span></label>
+              <input
+                type="text"
+                id="reviewName"
+                class="form-input"
+                placeholder="მაგ. ნინო"
+                required
+                minlength="2"
+                maxlength="60"
+                autocomplete="given-name"
+              >
+            </div>
+            <div class="form-group">
+              <label>შეფასება <span class="required">*</span></label>
+              <div id="starRating" class="star-rating" role="group" aria-label="აირჩიეთ შეფასება"></div>
+              <input type="hidden" id="reviewRating" value="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="reviewText">კომენტარი <span class="required">*</span></label>
+            <textarea
+              id="reviewText"
+              class="form-input form-input--textarea"
+              rows="3"
+              placeholder="გაგვიზიარეთ თქვენი გამოცდილება…"
+              required
+              minlength="10"
+              maxlength="300"
+            ></textarea>
+          </div>
+          <div id="reviewBanner" class="form-banner" hidden role="alert" aria-live="polite"></div>
+          <button type="submit" class="btn btn--primary">📤 გაგზავნა</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="section--sm">
+    <div class="container">
+      <div class="cta-banner reveal">
+        <h2>პირველი ვიზიტი — უფასო კონსულტაცია!</h2>
+        <p>ჩაწერეთ ახლავე და მიიღეთ უფასო სტომატოლოგიური შემოწმება</p>
+        <div class="cta-banner__actions">
+          <a href="contact.html" class="btn btn--white">📅 ჩაწერა ახლავე</a>
+          <a href="tel:599932616" class="btn btn--outline-white">📞 599 93 26 16</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="logo">
+          <div class="logo__mark">🦷</div>
+          IN VERA <span>DENT</span>
+        </a>
+        <p class="mt-12">პროფესიონალური სტომატოლოგიური კლინიკა თბილისში. გამოცდილება, სიახლე, კომფორტი.</p>
+        <div class="footer__socials mt-16">
+          <a href="#" class="footer__social-btn" aria-label="Facebook">📘</a>
+          <a href="#" class="footer__social-btn" aria-label="Instagram">📸</a>
+          <a href="#" class="footer__social-btn" aria-label="YouTube">▶️</a>
+        </div>
+      </div>
+      <div class="footer__col">
+        <h4>სერვისები</h4>
+        <ul>
+          <li><a href="services.html">თერაპია</a></li>
+          <li><a href="services.html">ქირურგია</a></li>
+          <li><a href="services.html">ორთოდონტია</a></li>
+          <li><a href="services.html">იმპლანტოლოგია</a></li>
+          <li><a href="services.html">ორთოპედია</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>ნავიგაცია</h4>
+        <ul>
+          <li><a href="index.html">მთავარი</a></li>
+          <li><a href="services.html">სერვისები</a></li>
+          <li><a href="prices.html">ფასები</a></li>
+          <li><a href="contact.html">კონტაქტი</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>კონტაქტი</h4>
+        <ul>
+          <li><a href="#">📍 თბილისი, ვ.ბარნოვის 24</a></li>
+          <li><a href="tel:599932616">📞 599 93 26 16</a></li>
+          <li><a href="mailto:inveradent@gmail.com">✉️ inveradent@gmail.com</a></li>
+          <li><a href="#">⏰ ორშ–შბთ 10–18</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2024 In Vera Dent. ყველა უფლება დაცულია.</p>
+      <p>Made with ❤️ in Tbilisi</p>
+    </div>
+  </div>
+</footer>
+
+<a href="tel:599932616" class="fab-phone" aria-label="დარეკვა">📞</a>
+
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
