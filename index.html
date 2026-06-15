@@ -5,9 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="In Vera Dent — პროფესიონალური სტომატოლოგიური კლინიკა თბილისში">
   <title>In Vera Dent — სტომატოლოგია</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap">
   <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+<a class="skip-link" href="#main">მთავარ შინაარსზე გადასვლა</a>
 
 <header>
   <nav class="navbar" aria-label="მთავარი ნავიგაცია">
@@ -26,7 +30,7 @@
 
       <div class="nav-cta">
         <a href="tel:599932616" class="btn btn--ghost btn--sm">📞 599 93 26 16</a>
-        <a href="contact.html" class="btn btn--primary btn--sm">ჩაწერა</a>
+        <a href="contact.html#book" class="btn btn--primary btn--sm">ჩაწერა</a>
       </div>
 
       <button class="nav-hamburger" aria-label="მენიუ" aria-expanded="false">
@@ -42,12 +46,12 @@
     <a href="contact.html"><span class="nav-drawer__icon">📬</span> კონტაქტი</a>
     <div class="nav-drawer__footer">
       <a href="tel:599932616" class="btn btn--secondary btn--full">📞 599 93 26 16</a>
-      <a href="contact.html" class="btn btn--primary btn--full">ჩაწერა ახლავე</a>
+      <a href="contact.html#book" class="btn btn--primary btn--full">ჩაწერა ახლავე</a>
     </div>
   </div>
 </header>
 
-<main>
+<main id="main">
 
   <!-- Hero -->
   <section class="hero">
@@ -65,20 +69,20 @@
             კომფორტულ გარემოში. გამოცდილი ექიმები, მოწინავე ტექნოლოგიები.
           </p>
           <div class="hero__actions anim-fade-up delay-3">
-            <a href="contact.html" class="btn btn--primary">📅 ჩაწერეთ ახლავე</a>
+            <a href="contact.html#book" class="btn btn--primary">📅 ჩაწერეთ ახლავე</a>
             <a href="services.html" class="btn btn--secondary">სერვისები →</a>
           </div>
           <div class="hero__stats anim-fade-up delay-4">
-            <div class="stat__item">
-              <div class="stat__num" data-target="10" data-suffix="+">20+</div>
-              <div class="stat__label">წელი გამოცდ.</div>
+            <div class="stat">
+              <div class="stat__num">20+</div>
+              <div class="stat__label">წლის გამოცდილება</div>
             </div>
-            <div class="stat__item">
-              <div class="stat__num" data-target="1000" data-suffix="+">2000+</div>
+            <div class="stat">
+              <div class="stat__num">2000+</div>
               <div class="stat__label">პაციენტი</div>
             </div>
-            <div class="stat__item">
-              <div class="stat__num" data-target="5">5</div>
+            <div class="stat">
+              <div class="stat__num">5</div>
               <div class="stat__label">სპეციალისტი</div>
             </div>
           </div>
@@ -136,10 +140,6 @@
             alt="In Vera Dent კლინიკის მოდერნული სამკურნალო კაბინეტი"
             loading="lazy"
           >
-          <div class="about__img-badge">
-            <span>20+</span>
-            წელი გამოცდილება
-          </div>
         </div>
 
         <div class="reveal reveal--right">
@@ -209,7 +209,7 @@
             <h3>თერაპიული სტომატოლოგია</h3>
             <p>კარიესის მკურნალობა, ფილინგები, ფესვის არხის მკურნალობა. ტკივილის გარეშე.</p>
             <div class="service-card__footer">
-              <div class="service-card__price-tag">80 ₾-დან<span>ერთი სეანსი</span></div>
+              <div class="service-card__price-tag">50 ₾-დან<span>ერთი სეანსი</span></div>
               <a href="services.html" class="btn btn--ghost btn--sm">გაიგე →</a>
             </div>
           </div>
@@ -225,7 +225,7 @@
             <h3>ორთოდონტია</h3>
             <p>ბრეკეტები, ინვიზელაინი, კბილების გასწორება. ლამაზი ღიმილი სწრაფად.</p>
             <div class="service-card__footer">
-              <div class="service-card__price-tag">1200 ₾-დან<span>სრული კურსი</span></div>
+              <div class="service-card__price-tag">1000 ₾-დან<span>სრული კურსი</span></div>
               <a href="services.html" class="btn btn--ghost btn--sm">გაიგე →</a>
             </div>
           </div>
@@ -255,13 +255,13 @@
   </section>
 
   <!-- Teeth Whitening — Before & After comparison slider -->
-  <section class="section section--alt" aria-labelledby="compare-title">
+  <section class="section" aria-labelledby="compare-title">
     <div class="container container--medium">
       <div class="section-header section-header--centered reveal">
-        <p class="label text-teal">Teeth Whitening</p>
-        <h2 class="display-md mt-8" id="compare-title">Before &amp; After</h2>
+        <p class="label text-teal">კბილების გათეთრება</p>
+        <h2 class="display-md mt-8" id="compare-title">მანამდე და შემდეგ</h2>
         <p class="body-md text-soft mt-12 intro-text">
-          Drag the slider to see a real whitening transformation
+          გადაანაცვლეთ სლაიდერი გათეთრების რეალური შედეგის სანახავად
         </p>
       </div>
 
@@ -271,29 +271,53 @@
             <!-- "after" = bright/white base layer -->
             <img class="compare__img compare__img--after"
                  src="img/whitening-before-after.jpg"
-                 alt="Smile after teeth whitening" loading="lazy">
+                 alt="ღიმილი კბილების გათეთრების შემდეგ" loading="lazy">
 
             <!-- "before" = same photo, dulled/yellowed via CSS filter, clipped by --pos -->
             <div class="compare__before">
               <img class="compare__img compare__img--before"
                    src="img/whitening-before-after.jpg"
-                   alt="Smile before teeth whitening" loading="lazy">
+                   alt="ღიმილი კბილების გათეთრებამდე" loading="lazy">
             </div>
 
-            <span class="compare__label compare__label--before">Before</span>
-            <span class="compare__label compare__label--after">After</span>
+            <span class="compare__label compare__label--before">მანამდე</span>
+            <span class="compare__label compare__label--after">შემდეგ</span>
 
             <input type="range" min="0" max="100" value="50"
                    class="compare__range"
-                   aria-label="Before and after whitening comparison slider">
+                   aria-label="გათეთრების მანამდე და შემდეგ შედარების სლაიდერი">
 
             <div class="compare__handle" aria-hidden="true">
               <span class="compare__grip">⇄</span>
             </div>
           </div>
         </div>
-        <figcaption class="compare-block__hint">◀ Drag to compare ▶</figcaption>
+        <figcaption class="compare-block__hint">◀ გადაანაცვლეთ შესადარებლად ▶</figcaption>
       </figure>
+    </div>
+  </section>
+
+  <!-- Trust Strip -->
+  <section class="section--sm" aria-label="ნდობის მაჩვენებლები">
+    <div class="container">
+      <ul class="trust-bar reveal">
+        <li class="trust-bar__item">
+          <span class="trust-bar__icon">🏅</span>
+          <span class="trust-bar__text"><strong>ლიცენზირებული</strong> კლინიკა</span>
+        </li>
+        <li class="trust-bar__item">
+          <span class="trust-bar__icon">🦷</span>
+          <span class="trust-bar__text"><strong>20+ წელი</strong> გამოცდილება</span>
+        </li>
+        <li class="trust-bar__item">
+          <span class="trust-bar__icon">🛡️</span>
+          <span class="trust-bar__text"><strong>10 წლამდე</strong> გარანტია</span>
+        </li>
+        <li class="trust-bar__item">
+          <span class="trust-bar__icon">💳</span>
+          <span class="trust-bar__text"><strong>0%</strong> განვადება</span>
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -304,7 +328,7 @@
         <h2>პირველი ვიზიტი — უფასო კონსულტაცია!</h2>
         <p>ჩაწერეთ ახლავე და მიიღეთ უფასო სტომატოლოგიური შემოწმება</p>
         <div class="cta-banner__actions">
-          <a href="contact.html" class="btn btn--white">📅 ჩაწერა ახლავე</a>
+          <a href="contact.html#book" class="btn btn--white">📅 ჩაწერა ახლავე</a>
           <a href="tel:599932616" class="btn btn--outline-white">📞 599 93 26 16</a>
         </div>
       </div>
@@ -326,11 +350,11 @@
       <div class="footer__col">
         <h4>სერვისები</h4>
         <ul>
-          <li><a href="services.html">თერაპია</a></li>
-          <li><a href="services.html">ქირურგია</a></li>
-          <li><a href="services.html">ორთოდონტია</a></li>
-          <li><a href="services.html">იმპლანტოლოგია</a></li>
-          <li><a href="services.html">ორთოპედია</a></li>
+          <li><a href="services.html#therapy">თერაპია</a></li>
+          <li><a href="services.html#surgery">ქირურგია</a></li>
+          <li><a href="services.html#orthodontics">ორთოდონტია</a></li>
+          <li><a href="services.html#implant">იმპლანტოლოგია</a></li>
+          <li><a href="services.html#prosthetics">ორთოპედია</a></li>
         </ul>
       </div>
       <div class="footer__col">
@@ -345,7 +369,7 @@
       <div class="footer__col">
         <h4>კონტაქტი</h4>
         <ul>
-          <li><a href="#">📍 თბილისი, ვ.ბარნოვის 24</a></li>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=41.7025,44.788" target="_blank" rel="noopener">📍 თბილისი, ვ.ბარნოვის 24</a></li>
           <li><a href="tel:599932616">📞 599 93 26 16</a></li>
           <li><a href="mailto:inveradent@gmail.com">✉️ inveradent@gmail.com</a></li>
         </ul>
