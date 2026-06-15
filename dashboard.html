@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="In Vera Dent — ჩაწერების პანელი">
+  <title>პანელი | In Vera Dent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+<a class="skip-link" href="#main">მთავარ შინაარსზე გადასვლა</a>
+
+<header>
+  <nav class="navbar" aria-label="მთავარი ნავიგაცია">
+    <div class="navbar__inner">
+      <a href="index.html" class="logo">
+        <div class="logo__mark">🦷</div>
+        IN VERA <span>DENT</span>
+      </a>
+
+      <ul class="nav-links">
+        <li class="nav-links__item"><a href="index.html" class="nav-links__link">მთავარი</a></li>
+        <li class="nav-links__item"><a href="services.html" class="nav-links__link">სერვისები</a></li>
+        <li class="nav-links__item"><a href="prices.html" class="nav-links__link">ფასები</a></li>
+        <li class="nav-links__item"><a href="contact.html" class="nav-links__link">კონტაქტი</a></li>
+      </ul>
+
+      <div class="nav-cta">
+        <a href="tel:599932616" class="btn btn--ghost btn--sm">📞 599 93 26 16</a>
+        <a href="contact.html#book" class="btn btn--primary btn--sm">ჩაწერა</a>
+      </div>
+
+      <button class="nav-hamburger" aria-label="მენიუ" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="nav-drawer" role="dialog" aria-label="მობილური მენიუ">
+    <a href="index.html"><span class="nav-drawer__icon">🏠</span> მთავარი</a>
+    <a href="services.html"><span class="nav-drawer__icon">🦷</span> სერვისები</a>
+    <a href="prices.html"><span class="nav-drawer__icon">💰</span> ფასები</a>
+    <a href="contact.html"><span class="nav-drawer__icon">📬</span> კონტაქტი</a>
+    <div class="nav-drawer__footer">
+      <a href="contact.html#book" class="btn btn--primary btn--full">ჩაწერა ახლავე</a>
+    </div>
+  </div>
+</header>
+
+<main class="dashboard" id="main">
+
+  <!-- Dashboard Title Bar -->
+  <div class="dashboard__title-bar">
+    <div class="container">
+      <div class="dashboard__title-inner">
+        <div>
+          <span class="dashboard__badge">🔒 ადმინ პანელი</span>
+          <h1 class="dashboard__heading">ჩაწერების პანელი</h1>
+          <p class="dashboard__subheading">ყველა ონლაინ ჩაწერა ერთ სივრცეში</p>
+        </div>
+        <div class="dashboard__actions">
+          <a href="contact.html#book" class="btn btn--primary btn--sm">+ ახალი ჩაწერა</a>
+          <a href="login.html" class="btn btn--white btn--sm" id="logoutBtn">🚪 გასვლა</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Stats Row -->
+    <div class="stats-row" aria-label="სტატისტიკა">
+      <div class="stat-card stat-card--total">
+        <div class="stat-card__icon">📋</div>
+        <div class="stat-card__body">
+          <div class="stat-card__num" id="stat-total">—</div>
+          <div class="stat-card__label">სულ ჩაწერა</div>
+        </div>
+      </div>
+      <div class="stat-card stat-card--filtered">
+        <div class="stat-card__icon">🔍</div>
+        <div class="stat-card__body">
+          <div class="stat-card__num" id="stat-filtered">—</div>
+          <div class="stat-card__label">ნაჩვენები</div>
+        </div>
+      </div>
+      <div class="stat-card stat-card--confirmed">
+        <div class="stat-card__icon">✅</div>
+        <div class="stat-card__body">
+          <div class="stat-card__num" id="stat-confirmed">—</div>
+          <div class="stat-card__label">დადასტურებული</div>
+        </div>
+      </div>
+      <div class="stat-card stat-card--pending">
+        <div class="stat-card__icon">⏳</div>
+        <div class="stat-card__body">
+          <div class="stat-card__num" id="stat-pending">—</div>
+          <div class="stat-card__label">მოლოდინში</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls Bar -->
+    <div class="dashboard-controls" role="search">
+      <label for="appointmentSearch" class="sr-only">ძებნა</label>
+      <div class="search-wrap">
+        <span class="search-wrap__icon" aria-hidden="true">🔍</span>
+        <input
+          type="search"
+          id="appointmentSearch"
+          class="search-wrap__input"
+          placeholder="ძებნა სახელით, სერვისით…"
+          autocomplete="off"
+          aria-label="ჩაწერების ძებნა"
+        >
+      </div>
+
+      <label for="serviceFilter" class="sr-only">სერვისის ფილტრი</label>
+      <select
+        id="serviceFilter"
+        class="filter-select"
+        aria-label="სერვისის ფილტრი"
+      >
+        <option value="all">ყველა სერვისი</option>
+        <option value="therapy">თერაპია</option>
+        <option value="surgery">ქირურგია</option>
+        <option value="implant">იმპლანტი</option>
+        <option value="prosthetics">ორთოპედია</option>
+        <option value="ortho">ორთოდონტია</option>
+        <option value="whitening">გათეთრება</option>
+      </select>
+
+      <button id="refreshBtn" class="btn btn--ghost btn--sm" aria-label="განახლება">
+        🔄 განახლება
+      </button>
+    </div>
+
+    <!-- Error Banner -->
+    <div
+      id="error-message"
+      class="error-banner"
+      role="alert"
+      aria-live="assertive"
+      hidden
+    ></div>
+
+    <!-- Loading Spinner -->
+    <div id="loading-spinner" class="loading-spinner" aria-label="იტვირთება" aria-live="polite">
+      <div class="spinner" aria-hidden="true"></div>
+      <span>ჩაწერები იტვირთება…</span>
+    </div>
+
+    <!-- Appointments List (populated by JS) -->
+    <div
+      id="appointments-list"
+      class="appt-grid"
+      role="list"
+      aria-label="ჩაწერების სია"
+    ></div>
+
+  </div>
+  <!-- Modal is created dynamically by JS (showModal function) -->
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <a href="index.html" class="logo">
+          <div class="logo__mark">🦷</div>
+          IN VERA <span>DENT</span>
+        </a>
+        <p class="mt-12">პროფესიონალური სტომატოლოგიური კლინიკა თბილისში.</p>
+      </div>
+      <div class="footer__col">
+        <h4>ნავიგაცია</h4>
+        <ul>
+          <li><a href="index.html">მთავარი</a></li>
+          <li><a href="services.html">სერვისები</a></li>
+          <li><a href="prices.html">ფასები</a></li>
+          <li><a href="contact.html">კონტაქტი</a></li>
+        </ul>
+      </div>
+      <div class="footer__col">
+        <h4>კონტაქტი</h4>
+        <ul>
+          <li><a href="https://www.google.com/maps/search/?api=1&query=41.7025,44.788" target="_blank" rel="noopener">📍 ვ.ბარნოვის ქ. 24</a></li>
+          <li><a href="tel:599932616">📞 599 93 26 16</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <p>© 2026 In Vera Dent. ყველა უფლება დაცულია.</p>
+    </div>
+  </div>
+</footer>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

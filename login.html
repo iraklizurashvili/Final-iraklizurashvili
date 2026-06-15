@@ -3,25 +3,47 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>შესვლა — პროექტის სახელი</title>
-  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="In Vera Dent — ადმინისტრატორის შესვლა">
+  <title>შესვლა | In Vera Dent</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@700;800;900&display=swap">
+  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
+<a class="skip-link" href="#main">მთავარ შინაარსზე გადასვლა</a>
 
-  <main>
+  <main class="login" id="main">
+    <div class="login__card">
+      <a href="index.html" class="logo">
+        <div class="logo__mark">🦷</div>
+        IN VERA <span>DENT</span>
+      </a>
 
-    <form id="login-form">
-      <!-- input type="text" ვალიდაციის ატრიბუტებით -->
-      <label for="name-input">შენი სახელი</label>
-      <input id="name-input" type="text" name="name" required minlength="2" autocomplete="name">
+      <h1 class="login__title">ადმინ პანელი</h1>
+      <p class="login__hint">გასაგრძელებლად შეიყვანეთ პაროლი</p>
 
-      <p id="login-error" hidden></p>
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label for="password">პაროლი</label>
+          <input
+            type="password"
+            id="password"
+            class="form-input"
+            placeholder="••••••••"
+            autocomplete="current-password"
+            autofocus
+            required
+          >
+          <span class="field-error" id="loginError" role="alert"></span>
+        </div>
+        <button type="submit" class="btn btn--primary btn--full">შესვლა →</button>
+      </form>
 
-      <button type="submit">დაწყება →</button>
-    </form>
-
+      <a href="index.html" class="login__back">← მთავარ გვერდზე</a>
+    </div>
   </main>
 
-  <script type="module" src="js/login.js"></script>
+  <script type="module" src="js/main.js"></script>
 </body>
 </html>
