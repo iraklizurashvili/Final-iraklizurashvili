@@ -1,12 +1,6 @@
-// js/notify.js — emails a booking notification to the clinic via Web3Forms.
-//
-// SETUP (one time, ~1 minute):
-//   1. Go to https://web3forms.com
-//   2. Enter your email (iraklizurashvili67@gmail.com) → you get an Access Key.
-//   3. Paste that key into WEB3FORMS_KEY below.
-//
-// Until a real key is set, email sending is skipped silently and the booking
-// still works (it's saved to the API / dashboard).
+// Emails a booking notification to the clinic via Web3Forms.
+// To enable: get an access key from https://web3forms.com and paste it below.
+// Until then, email is skipped and the booking still saves to the dashboard.
 
 const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE';
 const ENDPOINT      = 'https://api.web3forms.com/submit';
@@ -15,12 +9,9 @@ export function isEmailConfigured() {
   return Boolean(WEB3FORMS_KEY) && WEB3FORMS_KEY !== 'YOUR_ACCESS_KEY_HERE';
 }
 
-/**
- * sendBookingEmail — sends the full booking (all fields) to your inbox.
- * Throws on failure so the caller can decide whether to surface it.
- */
+// Sends the full booking to the clinic inbox. Throws on failure.
 export async function sendBookingEmail(booking) {
-  if (!isEmailConfigured()) return null; // not set up yet — skip quietly
+  if (!isEmailConfigured()) return null;
 
   const res = await fetch(ENDPOINT, {
     method: 'POST',

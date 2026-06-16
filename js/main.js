@@ -1,56 +1,48 @@
-// js/main.js — module entry point
+// Module entry point — wires up every page after the DOM is ready.
 import { fetchAppointments } from './api.js';
 import { debounce, createPriceCalculator, formatDate, el } from './utils.js';
 import { initBooking } from './booking.js';
 import { guardDashboard, initLogin, initLogout } from './auth.js';
 import { SERVICES } from './data.js';
 
-// Mark JS-capable so CSS can hide .reveal content for the scroll animation.
-// If this module never runs (e.g. opened via file://), the class is never
-// added, so nothing is hidden and the page stays fully visible.
+// Flags the page as JS-capable so CSS can hide .reveal content until it animates
+// in. If the module never runs, nothing is hidden and the page stays visible.
 document.documentElement.classList.add('js');
 
-// Admin gate — run before the dashboard renders. The dashboard is the only
-// page with #appointments-list, so this only fires there.
+// The dashboard is the only page with #appointments-list, so the gate only
+// fires there.
 if (document.getElementById('appointments-list')) guardDashboard();
 
-// ─────────────────────────────────────────────────────────────
-// Application State  (array of objects, kept at module scope)
-// ─────────────────────────────────────────────────────────────
 const state = {
-  appointments: [],          // full list from API
-  filteredAppointments: [],  // current filtered/searched subset
+  appointments: [],
+  filteredAppointments: [],
   searchQuery: '',
   currentFilter: 'all',
 };
 
-// Bookings are stored by service display-name, but the dashboard filters by
-// category. This lookup maps one back to the other so the filter actually works.
+// Bookings are stored by service name but the dashboard filters by category;
+// this maps one to the other so filtering works.
 const CATEGORY_BY_NAME = new Map(SERVICES.map(s => [s.name, s.category]));
 
-// ─────────────────────────────────────────────────────────────
-// Navbar & Scroll
-// ─────────────────────────────────────────────────────────────
+// --- Navbar & mobile drawer ---
 function initNavbar() {
   const navbar    = document.querySelector('.navbar');
   const hamburger = document.querySelector('.nav-hamburger');
   const drawer    = document.querySelector('.nav-drawer');
   if (!navbar) return;
 
-  // scroll event — adds shadow when page scrolls past 20px
   window.addEventListener('scroll', () => {
     navbar.classList.toggle('navbar--scrolled', window.scrollY > 20);
   });
 
   if (hamburger && drawer) {
-    // click event — toggle mobile drawer
     hamburger.addEventListener('click', () => {
       const isOpen = drawer.classList.toggle('nav-drawer--open');
       hamburger.classList.toggle('nav-hamburger--open', isOpen);
       hamburger.setAttribute('aria-expanded', String(isOpen));
     });
 
-    // click event — close drawer when a link is tapped
+    // Close the drawer once a link inside it is tapped.
     drawer.querySelectorAll('a, button').forEach(link => {
       link.addEventListener('click', () => {
         drawer.classList.remove('nav-drawer--open');
@@ -61,9 +53,7 @@ function initNavbar() {
   }
 }
 
-// ─────────────────────────────────────────────────────────────
-// Scroll Reveal  (IntersectionObserver)
-// ─────────────────────────────────────────────────────────────
+// --- Scroll reveal ---
 function initScrollReveal() {
   const els = document.querySelectorAll('.reveal');
   if (!els.length) return;
@@ -76,14 +66,11 @@ function initScrollReveal() {
   els.forEach(e => obs.observe(e));
 }
 
-// ─────────────────────────────────────────────────────────────
-// Dashboard  (dashboard.html) — public, no auth required
-// ─────────────────────────────────────────────────────────────
+// --- Dashboard ---
 async function initDashboard() {
   const list = document.getElementById('appointments-list');
   if (!list) return;
 
-  // input event — debounced search (closure: timeoutId private inside debounce)
   const searchInput = document.getElementById('appointmentSearch');
   if (searchInput) {
     searchInput.value = localStorage.getItem('lastSearch') || '';
@@ -97,7 +84,6 @@ async function initDashboard() {
 
     searchInput.addEventListener('input', onSearch);
 
-    // keydown event — Escape clears search field
     searchInput.addEventListener('keydown', e => {
       if (e.key === 'Escape') {
         searchInput.value = '';
@@ -108,7 +94,6 @@ async function initDashboard() {
     });
   }
 
-  // change event — service category filter, persisted across reloads
   const filterSelect = document.getElementById('serviceFilter');
   if (filterSelect) {
     state.currentFilter = localStorage.getItem('lastFilter') || 'all';
@@ -120,7 +105,6 @@ async function initDashboard() {
     });
   }
 
-  // click event — manual refresh
   document.getElementById('refreshBtn')?.addEventListener('click', loadAppointments);
 
   await loadAppointments();
@@ -136,8 +120,8 @@ async function loadAppointments() {
   if (errorDiv) errorDiv.hidden = true;
 
   try {
-    const data = await fetchAppointments(); // real external API — async/await
-    state.appointments = data;              // stored in module-level state array
+    const data = await fetchAppointments();
+    state.appointments = data;
     filterAndRender();
   } catch (err) {
     if (errorDiv) {
@@ -185,8 +169,7 @@ function renderCards(list) {
     return;
   }
 
-  // forEach: each card's handlers close over its own `appt` object.
-  // Cards are role="button", so they respond to both click and Enter/Space.
+  // Each card's handlers close over its own appt, so a click opens the right one.
   list.forEach((appt, idx) => {
     const card = buildCard(appt, idx);
     const open = () => showModal(appt, card);
@@ -206,10 +189,8 @@ function buildCard(appt, idx) {
     : 'pending';
   const statusClass = `appt-card__status--${statusKey}`;
 
-  // CSS nth-child handles staggered animation-delay — no inline style needed.
-  // The status modifier drives the card's coloured left accent.
   card.className = `appt-card appt-card--anim appt-card--${statusKey} reveal`;
-  card.dataset.idx = idx; // data attribute only, not style=""
+  card.dataset.idx = idx;
 
   const service = document.createElement('span');
   service.className   = 'appt-card__service';
@@ -274,7 +255,7 @@ function showModal(appt, trigger) {
   const dl = document.createElement('dl');
   dl.className = 'modal__details';
 
-  // Always-present rows, plus optional contact rows when the booking carries them.
+  // Required rows, plus contact rows only when the booking carries them.
   const rows = [
     ['👤 პაციენტი', appt.name || '—'],
     ['📅 თარიღი',   formatDate(appt.date)],
@@ -302,31 +283,26 @@ function showModal(appt, trigger) {
     trigger?.focus(); // return focus to the card that opened the modal
   };
 
-  // click — close on backdrop or the close button
   overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
   closeBtn.addEventListener('click', close);
 
-  // keydown — Escape closes; Tab is trapped inside the dialog
   const onKey = e => {
     if (e.key === 'Escape') { close(); return; }
-    if (e.key === 'Tab') { e.preventDefault(); closeBtn.focus(); } // only one focusable element
+    if (e.key === 'Tab') { e.preventDefault(); closeBtn.focus(); }
   };
   document.addEventListener('keydown', onKey);
   closeBtn.focus();
 }
 
-// ─────────────────────────────────────────────────────────────
-// Price Calculator  (prices.html)
-// ─────────────────────────────────────────────────────────────
+// --- Price calculator ---
 function initPriceCalculator() {
   const grid = document.getElementById('calcGrid');
   if (!grid) return;
 
-  const calculator = createPriceCalculator(SERVICES); // closure — private Set
+  const calculator = createPriceCalculator(SERVICES);
   const totalEl    = document.getElementById('calcTotal');
   const resetBtn   = document.getElementById('calcReset');
 
-  // Dynamically build a labelled checkbox for every service
   SERVICES.forEach(svc => {
     const label = document.createElement('label');
     label.className = 'calc-item';
@@ -356,7 +332,6 @@ function initPriceCalculator() {
 
     if (calculator.isSelected(svc.id)) label.classList.add('calc-item--active');
 
-    // change event — toggle + update total
     cb.addEventListener('change', () => {
       const total = calculator.toggle(svc.id);
       updateTotal(total);
@@ -368,7 +343,6 @@ function initPriceCalculator() {
 
   updateTotal(calculator.getTotal());
 
-  // click event — reset all selections
   resetBtn?.addEventListener('click', () => {
     calculator.reset();
     grid.querySelectorAll('.calc-item__checkbox').forEach(c => { c.checked = false; });
@@ -381,9 +355,7 @@ function initPriceCalculator() {
   }
 }
 
-// ─────────────────────────────────────────────────────────────
-// FAQ Accordion  (contact.html)
-// ─────────────────────────────────────────────────────────────
+// --- FAQ accordion ---
 function initFaq() {
   document.querySelectorAll('.faq-item__q').forEach(q => {
     q.addEventListener('click', () => {
@@ -401,14 +373,11 @@ function initFaq() {
   });
 }
 
-// ─────────────────────────────────────────────────────────────
-// Service Pills  (services.html)
-// ─────────────────────────────────────────────────────────────
+// --- Service section pills (services.html) ---
 function initServicePills() {
   const pills = document.querySelectorAll('.service-pill[href^="#"]');
   if (!pills.length) return;
 
-  // click event — smooth scroll to section
   pills.forEach(pill => {
     pill.addEventListener('click', e => {
       e.preventDefault();
@@ -419,7 +388,7 @@ function initServicePills() {
     });
   });
 
-  // scroll event — highlight pill matching current viewport section
+  // Highlight the pill for whichever section is currently in view.
   const ids = [...pills].map(p => p.getAttribute('href').slice(1));
   window.addEventListener('scroll', () => {
     let current = ids[0];
@@ -433,15 +402,13 @@ function initServicePills() {
   }, { passive: true });
 }
 
-// ─────────────────────────────────────────────────────────────
-// Before / After smile slider  (index.html)
-// ─────────────────────────────────────────────────────────────
+// --- Before/after smile slider ---
 function initCompare() {
   const box = document.getElementById('smileCompare');
   if (!box) return;
   const range = box.querySelector('.compare__range');
 
-  // single source of truth: --pos drives both the clip and the handle
+  // --pos drives both the image clip and the handle position.
   const setPos = v => {
     const p = Math.max(0, Math.min(100, v));
     box.style.setProperty('--pos', p + '%');
@@ -451,8 +418,8 @@ function initCompare() {
   setPos(Number(range.value));
   range.addEventListener('input', e => setPos(Number(e.target.value)));
 
-  // One-time "peek": when the slider scrolls into view, briefly sweep the
-  // handle so users notice it's draggable — then settle back to centre.
+  // When the slider first scrolls into view, briefly sweep the handle so users
+  // notice it's draggable, then settle back to centre.
   const peek = new IntersectionObserver((entries, obs) => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;
@@ -466,9 +433,6 @@ function initCompare() {
   peek.observe(box);
 }
 
-// ─────────────────────────────────────────────────────────────
-// Bootstrap — runs after DOM is ready
-// ─────────────────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   initLogin();
   initLogout();

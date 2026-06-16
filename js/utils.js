@@ -1,33 +1,19 @@
-// js/utils.js
+// Shared helpers used across the app.
 
-/**
- * debounce — closure that delays `func` until the user stops
- * triggering it for `delay` ms. The private `timeoutId` variable
- * is captured in a closure — no external code can reset it.
- *
- * Real use here: search input on dashboard so the API filter
- * only fires ~300 ms after the user pauses typing.
- */
+// Delays func until the user stops calling it for `delay` ms.
 export function debounce(func, delay) {
-  let timeoutId; // private — closed over by the returned function
+  let timeoutId;
   return (...args) => {
     clearTimeout(timeoutId);
     timeoutId = setTimeout(() => func(...args), delay);
   };
 }
 
-/**
- * createPriceCalculator — factory that wraps a private Set of
- * selected service IDs. Persists to localStorage automatically.
- *
- * Real use: price estimator on the prices page.
- *
- * @param {Array}  services    — array of {id, name, price} objects
- * @param {string} storageKey  — localStorage key for persistence
- */
+// Price estimator backing the prices page. Keeps the chosen service IDs in a
+// private Set and mirrors them to localStorage so the selection survives reloads.
 export function createPriceCalculator(services, storageKey = 'selectedServices') {
   const saved    = JSON.parse(localStorage.getItem(storageKey) || '[]');
-  const selected = new Set(saved); // private — not exposed directly
+  const selected = new Set(saved);
 
   function save() {
     localStorage.setItem(storageKey, JSON.stringify([...selected]));
@@ -41,10 +27,6 @@ export function createPriceCalculator(services, storageKey = 'selectedServices')
   };
 }
 
-/**
- * formatDate — converts an ISO or date string to a
- * human-readable Georgian format.
- */
 export function formatDate(dateStr) {
   if (!dateStr) return '—';
   const date = new Date(dateStr);
@@ -54,11 +36,7 @@ export function formatDate(dateStr) {
   });
 }
 
-/**
- * showBanner — shows a temporary success/error message inside a
- * .form-banner element, then auto-hides it. Shared by the booking
- * and review forms so both behave identically.
- */
+// Shows a temporary message in a .form-banner element, then auto-hides it.
 export function showBanner(el, msg, type, timeout = 6000) {
   if (!el) return;
   el.textContent = msg;
@@ -68,9 +46,6 @@ export function showBanner(el, msg, type, timeout = 6000) {
   el._t = setTimeout(() => { el.hidden = true; }, timeout);
 }
 
-/**
- * el — thin createElement wrapper used throughout the module.
- */
 export function el(tag, className = '', html = '') {
   const node = document.createElement(tag);
   if (className) node.className = className;

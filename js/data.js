@@ -1,8 +1,5 @@
-// js/data.js — shared service catalog
-//
-// Single source of truth for the clinic's services. Imported by both
-// the price calculator (main.js) and the booking form (booking.js) so
-// the two never drift out of sync.
+// Shared service catalog — the single source of truth for prices, imported by
+// both the price calculator and the booking form.
 
 export const SERVICES = [
   { id: 'caries',       name: 'კარიესი',                  price: 70,   category: 'therapy' },

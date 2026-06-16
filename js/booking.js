@@ -1,8 +1,5 @@
-// js/booking.js — online appointment booking form (contact.html)
-//
-// Handles the whole submission flow in JavaScript: client-side validation,
-// a real POST to the external API, success/error feedback, and local
-// persistence of every booking made on this device.
+// Online appointment booking form (contact.html). Validates input, POSTs to the
+// API, optionally emails the clinic, and keeps a local copy of each booking.
 
 import { SERVICES } from './data.js';
 import { createAppointment } from './api.js';
@@ -11,13 +8,9 @@ import { showBanner } from './utils.js';
 
 const STORAGE_KEY = 'ivd_bookings';
 
-/**
- * createSessionCounter — closure with a private `count` that no outside
- * code can read or reset directly. Used to show how many appointments the
- * visitor has booked during the current session.
- */
+// Tracks how many bookings were made this session; count stays private.
 function createSessionCounter() {
-  let count = 0; // private — lives only inside this closure
+  let count = 0;
   return {
     increment() { return ++count; },
     get()       { return count; },
@@ -38,7 +31,6 @@ export function initBooking() {
   form.addEventListener('submit', e => handleBookingSubmit(e, { form, banner, counterEl, counter }));
 }
 
-// Build the <option> list dynamically from the shared catalog.
 function populateServiceOptions(select) {
   if (!select) return;
   SERVICES.forEach(svc => {
@@ -49,7 +41,6 @@ function populateServiceOptions(select) {
   });
 }
 
-// Stop users from picking a date in the past.
 function lockPastDates(input) {
   if (input) input.min = new Date().toISOString().split('T')[0];
 }
@@ -57,7 +48,6 @@ function lockPastDates(input) {
 async function handleBookingSubmit(e, { form, banner, counterEl, counter }) {
   e.preventDefault();
 
-  // Native HTML5 validation (required, type, minlength, pattern…)
   if (!form.checkValidity()) {
     form.reportValidity();
     showBanner(banner, '⚠️ გთხოვთ, შეავსოთ ყველა სავალდებულო ველი სწორად', 'error');
@@ -71,7 +61,6 @@ async function handleBookingSubmit(e, { form, banner, counterEl, counter }) {
   submitBtn.disabled  = true;
   submitBtn.textContent = '⏳ იგზავნება…';
 
-  // Full record — every field travels to the dashboard and the email.
   const appointment = {
     name:    data.name,
     phone:   data.phone,
@@ -83,10 +72,8 @@ async function handleBookingSubmit(e, { form, banner, counterEl, counter }) {
     status:  'pending',
   };
 
-  // Two independent channels: save to the dashboard API and (if set up) email
-  // the clinic. The booking counts as received if EITHER active channel
-  // succeeds, so an outage in one (e.g. the throwaway MockAPI) never loses a
-  // real lead.
+  // Send to the API and (if set up) the clinic email in parallel. The booking
+  // counts as received if either channel succeeds, so one outage never loses it.
   const emailActive = isEmailConfigured();
   const tasks = [createAppointment(appointment)];
   if (emailActive) tasks.push(sendBookingEmail(appointment));
@@ -103,7 +90,6 @@ async function handleBookingSubmit(e, { form, banner, counterEl, counter }) {
   submitBtn.disabled    = false;
   submitBtn.textContent = original;
 
-  // No active channel succeeded → keep the user's input and let them retry.
   if (!apiOk && !emailOk) {
     showBanner(banner, '⚠️ გაგზავნა ვერ მოხერხდა. სცადეთ თავიდან ან დაგვირეკეთ.', 'error');
     return;
@@ -134,7 +120,6 @@ function serviceName(id) {
   return SERVICES.find(s => s.id === id)?.name ?? id;
 }
 
-// Application state persisted as an array of objects in localStorage.
 function persistBooking(booking) {
   const list = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
   list.push(booking);
