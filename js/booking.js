@@ -1,6 +1,6 @@
 import { SERVICES } from './data.js';
 import { createAppointment } from './api.js';
-import { sendBookingEmail, isEmailConfigured } from './notify.js';
+import { sendBookingEmail, sendCustomerConfirmation, isEmailConfigured } from './notify.js';
 import { showBanner } from './utils.js';
 
 const STORAGE_KEY = 'ivd_bookings';
@@ -68,20 +68,24 @@ async function handleBookingSubmit(e, { form, banner, counterEl, counter }) {
     status:  'pending',
   };
 
-  // Fire the API and email in parallel — the booking counts as received if
-  // either one succeeds, so a single outage never loses it.
+  // Fire all channels in parallel — the booking counts as received if the API
+  // or clinic email succeeds, so one outage never loses it. The patient
+  // confirmation is best-effort and never blocks the booking.
   const emailActive = isEmailConfigured();
-  const tasks = [createAppointment(appointment)];
-  if (emailActive) tasks.push(sendBookingEmail(appointment));
 
-  const [apiResult, emailResult] = await Promise.allSettled(tasks);
+  const [apiResult, clinicResult, confirmResult] = await Promise.allSettled([
+    createAppointment(appointment),
+    emailActive ? sendBookingEmail(appointment) : Promise.resolve(null),
+    appointment.email ? sendCustomerConfirmation(appointment) : Promise.resolve(null),
+  ]);
 
   const apiOk   = apiResult.status === 'fulfilled';
-  const emailOk = emailActive && emailResult.status === 'fulfilled';
+  const emailOk = emailActive && clinicResult.status === 'fulfilled';
 
   if (apiOk) persistBooking({ ...appointment, id: apiResult.value?.id ?? Date.now() });
-  if (apiResult.reason)   console.warn('dashboard save failed:', apiResult.reason.message);
-  if (emailResult?.reason) console.warn('email failed:', emailResult.reason.message);
+  if (apiResult.reason)     console.warn('dashboard save failed:', apiResult.reason.message);
+  if (clinicResult.reason)  console.warn('clinic email failed:', clinicResult.reason.message);
+  if (confirmResult.reason) console.warn('patient confirmation failed:', confirmResult.reason.message);
 
   submitBtn.disabled    = false;
   submitBtn.textContent = original;
