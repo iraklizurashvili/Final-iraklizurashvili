@@ -1,6 +1,3 @@
-// Online appointment booking form (contact.html). Validates input, POSTs to the
-// API, optionally emails the clinic, and keeps a local copy of each booking.
-
 import { SERVICES } from './data.js';
 import { createAppointment } from './api.js';
 import { sendBookingEmail, isEmailConfigured } from './notify.js';
@@ -8,7 +5,6 @@ import { showBanner } from './utils.js';
 
 const STORAGE_KEY = 'ivd_bookings';
 
-// Tracks how many bookings were made this session; count stays private.
 function createSessionCounter() {
   let count = 0;
   return {
@@ -72,8 +68,8 @@ async function handleBookingSubmit(e, { form, banner, counterEl, counter }) {
     status:  'pending',
   };
 
-  // Send to the API and (if set up) the clinic email in parallel. The booking
-  // counts as received if either channel succeeds, so one outage never loses it.
+  // Fire the API and email in parallel — the booking counts as received if
+  // either one succeeds, so a single outage never loses it.
   const emailActive = isEmailConfigured();
   const tasks = [createAppointment(appointment)];
   if (emailActive) tasks.push(sendBookingEmail(appointment));

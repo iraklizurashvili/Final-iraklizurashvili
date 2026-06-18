@@ -1,6 +1,3 @@
-// Shared helpers used across the app.
-
-// Delays func until the user stops calling it for `delay` ms.
 export function debounce(func, delay) {
   let timeoutId;
   return (...args) => {
@@ -9,8 +6,8 @@ export function debounce(func, delay) {
   };
 }
 
-// Price estimator backing the prices page. Keeps the chosen service IDs in a
-// private Set and mirrors them to localStorage so the selection survives reloads.
+// Keeps the chosen service IDs in a private Set, mirrored to localStorage so
+// the selection survives reloads.
 export function createPriceCalculator(services, storageKey = 'selectedServices') {
   const saved    = JSON.parse(localStorage.getItem(storageKey) || '[]');
   const selected = new Set(saved);
@@ -30,13 +27,12 @@ export function createPriceCalculator(services, storageKey = 'selectedServices')
 export function formatDate(dateStr) {
   if (!dateStr) return '—';
   const date = new Date(dateStr);
-  if (Number.isNaN(date.getTime())) return dateStr; // unparseable — show as-is
+  if (Number.isNaN(date.getTime())) return dateStr;
   return date.toLocaleDateString('ka-GE', {
     year: 'numeric', month: 'long', day: 'numeric',
   });
 }
 
-// Shows a temporary message in a .form-banner element, then auto-hides it.
 export function showBanner(el, msg, type, timeout = 6000) {
   if (!el) return;
   el.textContent = msg;

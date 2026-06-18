@@ -1,16 +1,12 @@
-// Module entry point — wires up every page after the DOM is ready.
 import { fetchAppointments } from './api.js';
 import { debounce, createPriceCalculator, formatDate, el } from './utils.js';
 import { initBooking } from './booking.js';
 import { guardDashboard, initLogin, initLogout } from './auth.js';
 import { SERVICES } from './data.js';
 
-// Flags the page as JS-capable so CSS can hide .reveal content until it animates
-// in. If the module never runs, nothing is hidden and the page stays visible.
+// Marks the page JS-capable so CSS can hide .reveal content until it animates in.
 document.documentElement.classList.add('js');
 
-// The dashboard is the only page with #appointments-list, so the gate only
-// fires there.
 if (document.getElementById('appointments-list')) guardDashboard();
 
 const state = {
@@ -20,8 +16,7 @@ const state = {
   currentFilter: 'all',
 };
 
-// Bookings are stored by service name but the dashboard filters by category;
-// this maps one to the other so filtering works.
+// Bookings are stored by service name but the dashboard filters by category.
 const CATEGORY_BY_NAME = new Map(SERVICES.map(s => [s.name, s.category]));
 
 // --- Navbar & mobile drawer ---
@@ -42,7 +37,6 @@ function initNavbar() {
       hamburger.setAttribute('aria-expanded', String(isOpen));
     });
 
-    // Close the drawer once a link inside it is tapped.
     drawer.querySelectorAll('a, button').forEach(link => {
       link.addEventListener('click', () => {
         drawer.classList.remove('nav-drawer--open');
@@ -169,7 +163,6 @@ function renderCards(list) {
     return;
   }
 
-  // Each card's handlers close over its own appt, so a click opens the right one.
   list.forEach((appt, idx) => {
     const card = buildCard(appt, idx);
     const open = () => showModal(appt, card);
@@ -255,7 +248,6 @@ function showModal(appt, trigger) {
   const dl = document.createElement('dl');
   dl.className = 'modal__details';
 
-  // Required rows, plus contact rows only when the booking carries them.
   const rows = [
     ['👤 პაციენტი', appt.name || '—'],
     ['📅 თარიღი',   formatDate(appt.date)],
@@ -280,7 +272,7 @@ function showModal(appt, trigger) {
   const close = () => {
     overlay.remove();
     document.removeEventListener('keydown', onKey);
-    trigger?.focus(); // return focus to the card that opened the modal
+    trigger?.focus();
   };
 
   overlay.addEventListener('click', e => { if (e.target === overlay) close(); });
@@ -388,7 +380,6 @@ function initServicePills() {
     });
   });
 
-  // Highlight the pill for whichever section is currently in view.
   const ids = [...pills].map(p => p.getAttribute('href').slice(1));
   window.addEventListener('scroll', () => {
     let current = ids[0];
@@ -408,7 +399,6 @@ function initCompare() {
   if (!box) return;
   const range = box.querySelector('.compare__range');
 
-  // --pos drives both the image clip and the handle position.
   const setPos = v => {
     const p = Math.max(0, Math.min(100, v));
     box.style.setProperty('--pos', p + '%');
@@ -418,8 +408,7 @@ function initCompare() {
   setPos(Number(range.value));
   range.addEventListener('input', e => setPos(Number(e.target.value)));
 
-  // When the slider first scrolls into view, briefly sweep the handle so users
-  // notice it's draggable, then settle back to centre.
+  // First time it scrolls into view, sweep the handle so users notice it drags.
   const peek = new IntersectionObserver((entries, obs) => {
     entries.forEach(e => {
       if (!e.isIntersecting) return;

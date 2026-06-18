@@ -1,6 +1,4 @@
-// Client-side admin gate for the dashboard. The password ships to the browser,
-// so this only keeps casual visitors out — it is not real security.
-
+// The password ships to the browser, so this only keeps casual visitors out.
 const ADMIN_PASSWORD = 'invera2026';
 const SESSION_KEY    = 'ivd_admin';
 
@@ -8,7 +6,6 @@ function isLoggedIn() {
   return sessionStorage.getItem(SESSION_KEY) === '1';
 }
 
-// Bounce anyone who isn't logged in back to the login page.
 export function guardDashboard() {
   if (!isLoggedIn()) location.replace('login.html');
 }
@@ -25,7 +22,6 @@ export function initLogin() {
   form.addEventListener('submit', e => {
     e.preventDefault();
     if (input.value === ADMIN_PASSWORD) {
-      // sessionStorage clears when the tab closes, so login lasts one session.
       sessionStorage.setItem(SESSION_KEY, '1');
       location.replace('dashboard.html');
     } else {

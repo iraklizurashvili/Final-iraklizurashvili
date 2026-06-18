@@ -1,6 +1,3 @@
-// Shared service catalog — the single source of truth for prices, imported by
-// both the price calculator and the booking form.
-
 export const SERVICES = [
   { id: 'caries',       name: 'კარიესი',                  price: 70,   category: 'therapy' },
   { id: 'treatment',    name: 'მკურნალობა',               price: 160,  category: 'therapy' },
