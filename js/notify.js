@@ -2,7 +2,7 @@
 // To enable: get an access key from https://web3forms.com and paste it below.
 // Until then, email is skipped and the booking still saves to the dashboard.
 
-const WEB3FORMS_KEY = 'YOUR_ACCESS_KEY_HERE';
+const WEB3FORMS_KEY = '1c5e31d7-fb70-41fc-b224-904100777e48';
 const ENDPOINT      = 'https://api.web3forms.com/submit';
 
 export function isEmailConfigured() {
