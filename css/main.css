@@ -146,7 +146,7 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
 .section--alt { background: var(--gray-50); }
 
 /* Container width variants */
-.container--medium { max-width: 960px !important; }
+.container.container--medium { max-width: 960px; }
 
 /* Intro / subtitle text */
 .intro-text    { max-width: 480px; margin: 8px auto 0; }
@@ -416,7 +416,7 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
 .js .reveal--right { transform: translateX(40px); }
 .js .reveal--visible { opacity: 1; transform: none; }
 /* fallback: if module scripts never run (e.g. opened via file://), show all */
-.no-reveal .reveal { opacity: 1 !important; transform: none !important; }
+html.no-reveal .reveal { opacity: 1; transform: none; }
 
 /* ── Features Strip (mobile-first: 2 columns) ─────────────── */
 .features-strip { padding: 24px 0; background: #fff; border-top: 1px solid var(--gray-100); border-bottom: 1px solid var(--gray-100); }
@@ -582,7 +582,8 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
 .form-group textarea { resize: vertical; min-height: 100px; }
 
 /* Real-time validation states */
-.form-input--invalid { border-color: var(--coral) !important; }
+.form-group .form-input--invalid,
+.form-group .form-input--invalid:focus { border-color: var(--coral); }
 .field-error         { font-size: 12px; color: var(--coral); margin-top: 2px; }
 
 /* Form banner (success / error) */
@@ -606,8 +607,6 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
 .radio-pill:hover { border-color: var(--teal); }
 .checkbox-row { flex-direction: row; align-items: center; gap: 10px; font-size: 14px; cursor: pointer; }
 .checkbox-row input { width: auto; }
-
-[hidden] { display: none !important; }
 
 .faq-item { background: white; border: 1px solid var(--gray-100); border-radius: var(--radius-md); margin-bottom: 10px; overflow: hidden; }
 .faq-item__q { width: 100%; text-align: left; padding: 18px 20px; font-size: 15px; font-weight: 700; color: var(--dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 12px; user-select: none; transition: background .15s; }
@@ -1094,3 +1093,8 @@ button { background: none; border: none; cursor: pointer; font-family: inherit; 
 .login form { text-align: left; }
 .login__back { display: inline-block; margin-top: 20px; font-size: 13px; color: var(--text-soft); }
 .login__back:hover { color: var(--teal-dark); }
+
+/* 
+   UTILITIES (kept last so source order wins on equal specificity)
+    */
+[hidden] { display: none; } 
